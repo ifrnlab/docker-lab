@@ -1,0 +1,717 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Jurandy Soares">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.5">
+    
+    
+      
+        <title>Docker - Docker Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#comando-docker" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Docker Lab" class="md-header__button md-logo" aria-label="Docker Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docker Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Docker Lab" class="md-nav__button md-logo" aria-label="Docker Lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Docker Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Docker Lab: Laboratório de Docker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../referencias/" class="md-nav__link">
+        Referencias
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../videos/" class="md-nav__link">
+        Videos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Comandos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Comandos" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Comandos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Comandos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-ps-a/" class="md-nav__link">
+        Docker ps a
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-ps/" class="md-nav__link">
+        Docker ps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-run-it-ubuntu-bin-bash/" class="md-nav__link">
+        Docker run it ubuntu bin bash
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-run-nginx/" class="md-nav__link">
+        Docker run nginx
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-run-p-8888-80-nginx/" class="md-nav__link">
+        Docker run p 8888 80 nginx
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-run-rm-it-p-8000-8000-v-pwd-docs-squidfunk-mkdocs-material/" class="md-nav__link">
+        Docker run rm it p 8000 8000 v pwd docs squidfunk mkdocs material
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Docker
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#saida" class="md-nav__link">
+    Saída
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpg-generate-key/" class="md-nav__link">
+        Gpg generate key
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#saida" class="md-nav__link">
+    Saída
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<p>(comando:docker)=</p>
+<h1 id="comando-docker">Comando <code>docker</code></h1>
+<pre><code>docker
+\____/
+  1   
+</code></pre>
+<ol>
+<li>
+<p><code>docker</code></p>
+<p>Explicação</p>
+</li>
+</ol>
+<h2 id="saida">Saída</h2>
+<p>Uso:  <code>docker [OPÇÕES] COMANDO</code></p>
+<p>Ambiente de execução auto-contido para contêineres</p>
+<p>Opções:</p>
+<table>
+<thead>
+<tr>
+<th>Op. curta</th>
+<th>Op. longa</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><code>--config string</code></td>
+<td>Localização dos arquivos de configuração do cliente (Padrão <code>/home/USUARIO/.docker</code>)</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td><code>--context string</code></td>
+<td>Nome do contexto a ser usado para se conectar ao daemon (Sobreescreve</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>a variável de ambiente <code>DOCKER_HOST</code> e contexto padrão configurado com <code>docker context use</code>)</td>
+</tr>
+<tr>
+<td><code>-D</code></td>
+<td><code>--debug</code></td>
+<td>Ativar modo de depuração</td>
+</tr>
+<tr>
+<td><code>-H</code></td>
+<td><code>--host</code> list`</td>
+<td>Soquete(s) daemon para se conectar a</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td><code>--log-level string</code></td>
+<td>Define o nível do log ("debug"| "info"|\"warn"|\"error"|"fatal")</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>(Padrão "info")</td>
+</tr>
+<tr>
+<td></td>
+<td><code>--tls</code></td>
+<td>Usa TLS; implicado por <code>--tlsverify</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>--tlscacert string</code></td>
+<td>Os certificados de confiança assinados apenas por esta Autoridade Certificadora (CA)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>(Padrão <code>/home/USUARIO/.docker/ca.pem</code>)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>--tlscert string</code></td>
+<td>Caminho para arquivo de certificado TLS</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>(Padrão <code>/home/USUARIO/.docker/cert.pem</code>)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>--tlskey string</code></td>
+<td>Caminho para arquivo chave do TLS (Padrão <code>/home/USUARIO/.docker/key.pem</code>)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>--tlsverify</code></td>
+<td>Usa TLS e verifica o remoto</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td><code>--version</code></td>
+<td>Exibe a informação da versão e sai</td>
+</tr>
+</tbody>
+</table>
+<p>Comandos de gerenciamento:</p>
+<ul>
+<li><code>app*</code>: dockerApp (dockerInc.,V091Beta3) (Inglês: <em>Docker App (Docker Inc., v0.9.1-beta3)</em>)</li>
+<li><code>builder</code>: Gerenciar construções (Inglês: <em>Manage builds</em>)</li>
+<li><code>buildx*</code>: Docker Buildx (Docker Inc., v0.8.2-Docker) (Inglês: <em>Docker Buildx (Docker Inc., v0.8.2-docker)</em>)</li>
+<li><code>compose*</code>: dockerCompose (dockerInc.,V261) (Inglês: <em>Docker Compose (Docker Inc., v2.6.1)</em>)</li>
+<li><code>config</code>: Gerencie as configurações do Docker (Inglês: <em>Manage Docker configs</em>)</li>
+<li><code>container</code>: Gerenciar contêineres (Inglês: <em>Manage containers</em>)</li>
+<li><code>context</code>: Gerenciar contextos (Inglês: <em>Manage contexts</em>)</li>
+<li><code>extension*</code>: Gerencia as extensões do Docker (Docker Inc., v0.2.7) (Inglês: <em>Manages Docker extensions (Docker Inc., v0.2.7)</em>)</li>
+<li><code>image</code>: Gerenciar imagens (Inglês: <em>Manage images</em>)</li>
+<li><code>manifest</code>: Gerenciar a imagem do Docker manifesta e manifestar listas (Inglês: <em>Manage Docker image manifests and manifest lists</em>)</li>
+<li><code>network</code>: Gerenciar redes (Inglês: <em>Manage networks</em>)</li>
+<li><code>node</code>: Gerencie nós enxames (Inglês: <em>Manage Swarm nodes</em>)</li>
+<li><code>plugin</code>: Gerenciar plugins (Inglês: <em>Manage plugins</em>)</li>
+<li><code>sbom*</code>: Veja a Lei de Materiais de Software Baseada em Pacotes (SBOM) para uma imagem (Anchore Inc., 0.6.0) (Inglês: <em>View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc., 0.6.0)</em>)</li>
+<li><code>scan*</code>: dockerScan (dockerInc.,V0170) (Inglês: <em>Docker Scan (Docker Inc., v0.17.0)</em>)</li>
+<li><code>secret</code>: Gerenciar segredos do Docker (Inglês: <em>Manage Docker secrets</em>)</li>
+<li><code>service</code>: Gerenciar serviços (Inglês: <em>Manage services</em>)</li>
+<li><code>stack</code>: Gerencie as pilhas do Docker (Inglês: <em>Manage Docker stacks</em>)</li>
+<li><code>swarm</code>: Gerenciar enxames (Inglês: <em>Manage Swarm</em>)</li>
+<li><code>system</code>: Gerencie o Docker (Inglês: <em>Manage Docker</em>)</li>
+<li><code>trust</code>: Gerenciar confiança nas imagens do Docker (Inglês: <em>Manage trust on Docker images</em>)</li>
+<li><code>volume</code>: Gerenciar volumes (Inglês: <em>Manage volumes</em>)</li>
+</ul>
+<p>Comandos:</p>
+<ul>
+<li><code>attach</code>: Anexe fluxos de entrada, saída e erro padrão em um contêiner em execução</li>
+<li><code>build</code>: Construa uma imagem de um Dockerfile</li>
+<li><code>commit</code>: Crie uma nova imagem das mudanças de um contêiner</li>
+<li><code>cp</code>: Copie arquivos/pastas entre um contêiner e o sistema de arquivos local</li>
+<li><code>create</code>: Crie um novo contêiner</li>
+<li><code>diff</code>: Inspecione alterações em arquivos ou diretórios no sistema de arquivos de um contêiner</li>
+<li><code>events</code>: Obtenha eventos em tempo real do servidor</li>
+<li><code>exec</code>: Execute um comando em um contêiner em execução</li>
+<li><code>export</code>: Exportar o sistema de arquivos de um contêiner como um arquivo alcatrão</li>
+<li><code>history</code>: Mostre a história de uma imagem</li>
+<li><code>images</code>: Listar imagens</li>
+<li><code>import</code>: Importe o conteúdo de um tarball para criar uma imagem do sistema de arquivos</li>
+<li><code>info</code>: Exibir informações em todo o sistema</li>
+<li><code>inspect</code>: Retorne informações de baixo nível sobre objetos do Docker</li>
+<li><code>kill</code>: Mate um ou mais contêineres em execução</li>
+<li><code>load</code>: Carregue uma imagem de um arquivo alcatrão ou stdin</li>
+<li><code>login</code>: Faça login em um registro do Docker</li>
+<li><code>logout</code>: Faça logon de um registro do Docker</li>
+<li><code>logs</code>: Buscar os registros de um contêiner</li>
+<li><code>pause</code>: Pausar todos os processos em um ou mais contêineres</li>
+<li><code>port</code>: Lista de mapeamentos de porta ou um mapeamento específico para o contêiner</li>
+<li><code>ps</code>: Listar contêineres</li>
+<li><code>pull</code>: Puxe uma imagem ou um repositório de um registro</li>
+<li><code>push</code>: Empurre uma imagem ou um repositório para um registro</li>
+<li><code>rename</code>: Renomeie um contêiner</li>
+<li><code>restart</code>: Reinicie um ou mais contêineres</li>
+<li><code>rm</code>: Remova um ou mais contêineres</li>
+<li><code>rmi</code>: Remova uma ou mais imagens</li>
+<li><code>run</code>: Execute um comando em um novo contêiner</li>
+<li><code>save</code>: Salve uma ou mais imagens em um arquivo alcatrão (transmitido para stdout por padrão)</li>
+<li><code>search</code>: Pesquise no Hub do Docker por imagens</li>
+<li><code>start</code>: Inicie um ou mais contêineres parados</li>
+<li><code>stats</code>: Exibir uma transmissão ao vivo de estatísticas de uso de recursos de contêineres</li>
+<li><code>stop</code>: Pare um ou mais contêineres em execução</li>
+<li><code>tag</code>: Crie um TAG Target_image que se refere a Source_Image</li>
+<li><code>top</code>: Exibir os processos de execução de um contêiner</li>
+<li><code>unpause</code>: Não refunda todos os processos dentro de um ou mais contêineres</li>
+<li><code>update</code>: Atualize a configuração de um ou mais contêineres</li>
+<li><code>version</code>: Mostre as informações da versão do Docker</li>
+<li><code>wait</code>: Bloqueie até um ou mais contêineres pararem e imprima seus códigos de saída</li>
+</ul>
+<p>Execute <code>docker COMANDO --help</code> para maiores informações sobre o comando.</p>
+<p>Para obter mais ajuda sobre docker, verifique os guias em: <a href="https://docs.docker.com/go/guides/">https://docs.docker.com/go/guides/</a>.</p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
+      
+        
+        <a href="../docker-run-rm-it-p-8000-8000-v-pwd-docs-squidfunk-mkdocs-material/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Docker run rm it p 8000 8000 v pwd docs squidfunk mkdocs material" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Docker run rm it p 8000 8000 v pwd docs squidfunk mkdocs material
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../gpg-generate-key/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Gpg generate key" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Próximo
+              </span>
+              Gpg generate key
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.85cb4492.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.config.lang": "pt", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Buscar", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version.title": "Selecione a vers\u00e3o"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.431f3d41.min.js"></script>
+      
+    
+  </body>
+</html>
