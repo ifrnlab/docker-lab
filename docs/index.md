@@ -5,5 +5,6 @@
 :caption: "Sumário:"
 
 comandos/index.md
+videos.md
 referencias.md
 ```
