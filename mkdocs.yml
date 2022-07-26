@@ -1,0 +1,6 @@
+site_name: Docker Lab
+site_author: Jurandy Soares
+
+theme:
+  name: material
+  language: pt

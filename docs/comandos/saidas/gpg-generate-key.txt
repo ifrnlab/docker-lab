@@ -1,0 +1,31 @@
+gpg (GnuPG) 2.2.27; Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Note: Use "gpg --full-generate-key" for a full featured key generation dialog.
+
+GnuPG precisa construir uma ID de usuário para identificar sua chave.
+
+Nome completo: Fulano de Tal
+Endereço de correio eletrônico: fulano.tal@gmail.com
+Você selecionou este identificador de usuário:
+    "Fulano de Tal <fulano.tal@gmail.com>"
+
+Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
+Precisamos gerar muitos bytes aleatórios. É uma boa idéia realizar outra
+atividade (digitar no teclado, mover o mouse, usar os discos) durante a
+geração dos números primos; isso dá ao gerador de números aleatórios
+uma chance melhor de conseguir entropia suficiente.
+Precisamos gerar muitos bytes aleatórios. É uma boa idéia realizar outra
+atividade (digitar no teclado, mover o mouse, usar os discos) durante a
+geração dos números primos; isso dá ao gerador de números aleatórios
+uma chance melhor de conseguir entropia suficiente.
+gpg: chave B65[...] marcada como plenamente confiável
+gpg: directory '/home/fulano/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/home/fulano/.gnupg/openpgp-revocs.d/451CE[...].rev'
+chaves pública e privada criadas e assinadas.
+
+pub   rsa3072 2022-07-26 [SC] [expira: 2024-07-25]
+      451CE[...]
+uid                      Fulano de Tal <fulano.tal@gmail.com>
+sub   rsa3072 2022-07-26 [E] [expira: 2024-07-25]
